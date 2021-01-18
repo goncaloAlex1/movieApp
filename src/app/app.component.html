@@ -1,0 +1,16 @@
+<app-header></app-header>
+<ng-container *ngIf="api.api; else Loggin">
+  <div class="container">
+    <router-outlet></router-outlet>
+  </div>
+</ng-container>
+<ng-template #Loggin>
+  <app-api-login></app-api-login>
+</ng-template>
+<particles
+  id="particles"
+  [params]="configs['myParams']"
+  [style]="configs['myStyle']"
+  [width]="configs['width']"
+  [height]="configs['height']"
+></particles>

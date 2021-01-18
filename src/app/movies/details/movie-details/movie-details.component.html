@@ -1,0 +1,54 @@
+<div class="details-container">
+  <div class="logo">
+    <img
+      style="width: 150px; height: 150px"
+      class="img-responsive"
+      src="../../../assets/logo.png"
+      alt=""
+    />
+  </div>
+  <div class="wrapper-search">
+    <div class="search-container w-100" style="position: relative">
+      <i class="fa fa-search"></i>
+      <input
+        style="border: none"
+        [(ngModel)]="movieUrl"
+        type="text"
+        placeholder="Search by title"
+        (keyup.enter)="changeMovie(movieUrl)"
+      />
+    </div>
+    <button
+      class="btn btn-danger btn-search"
+      (click)="changeMovie(movieUrl)"
+      style="height: 36px"
+    >
+      {{ "search_button_text" | translate }}
+    </button>
+  </div>
+  <ng-container *ngIf="loaded">
+    <ng-container *ngIf="movie; else error">
+      <div class="container-details">
+        <div class="bk-btn" (click)="goBack()">
+          <div class="bk-btn-triangle"></div>
+          <div class="bk-btn-bar"></div>
+        </div>
+        <div class="wrapper-movies">
+          <div class="wrapper-movies-text">
+            <span class="movie-title">{{ movie.Title }}</span>
+            <span>Year: {{ movie.Year }}</span>
+            <span> Type: {{ movie.Type }}</span>
+          </div>
+          <div class="wrapper-movies-image">
+            <img src="{{ movie.Poster }}" alt="{{ movie.Title }}" />
+          </div>
+        </div>
+      </div>
+      <ngx-spinner></ngx-spinner>
+    </ng-container>
+
+    <ng-template #error
+      ><div class="error-message">Search not found sorry!</div></ng-template
+    >
+  </ng-container>
+</div>

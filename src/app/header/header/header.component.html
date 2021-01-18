@@ -1,0 +1,42 @@
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+  <a class="navbar-brand" href="#">Search app</a>
+
+  <div class="ml-auto d-flex">
+    <div class="collapse navbar-collapse" id="navbarColor01">
+      <ul class="navbar-nav">
+        <li (click)="status = !status" class="nav-item dropdown show">
+          <a
+            class="nav-link dropdown-toggle"
+            data-toggle="dropdown"
+            role="button"
+            aria-haspopup="true"
+            aria-expanded="true"
+            >{{ "language" | translate }}</a
+          >
+
+          <div
+            [ngClass]="status ? 'show' : ''"
+            class="dropdown-menu"
+            style="left: -47px"
+          >
+            <a
+              *ngFor="let lang of translate.getLangs()"
+              (click)="translate.use(lang)"
+              [ngStyle]="
+                lang == translate.currentLang
+                  ? { 'background-color': 'lightblue' }
+                  : { 'background-color': '' }
+              "
+              class="dropdown-item"
+              style="cursor: pointer"
+              >{{ lang }}</a
+            >
+          </div>
+        </li>
+      </ul>
+    </div>
+    <div *ngIf="api.api" (click)="logout()">
+      <a class="nav-link ml-auto" href="#" style="color: white">Logout</a>
+    </div>
+  </div>
+</nav>

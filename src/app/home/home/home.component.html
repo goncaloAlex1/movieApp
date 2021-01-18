@@ -1,0 +1,65 @@
+<div class="home-div">
+  <div class="logo">
+    <img
+      style="width: 150px"
+      class="img-responsive"
+      src="../../../assets/logo.png"
+      alt=""
+    />
+  </div>
+  <div class="wrapper-search">
+    <div class="search-container" style="border: none">
+      <ng-select
+        placeholder="{{ 'allmovies_text' | translate }}"
+        [(ngModel)]="type"
+      >
+        <ng-option
+          *ngFor="let type of searchBy | keyvalue"
+          [value]="type.key"
+          >{{ type.value }}</ng-option
+        >
+      </ng-select>
+    </div>
+    <div class="search-container" style="position: relative">
+      <i class="fa fa-search"></i>
+      <input
+        [(ngModel)]="movieUrl"
+        type="text"
+        placeholder="Search by title"
+        (keyup.enter)="addInput()"
+      />
+    </div>
+
+    <button
+      class="btn btn-danger btn-search"
+      (click)="addInput()"
+      style="height: 36px"
+    >
+      {{ "search_button_text" | translate }}
+    </button>
+  </div>
+  <ng-container *ngIf="movies; else error">
+    <div class="wrapper-3cols">
+      <div
+        *ngFor="let attr of movies | slice: 0:loadingPage"
+        class="movie-container"
+        routerLink="/details/{{ attr.Title }}"
+      >
+        <div class="movie-title">{{ attr.Title }}</div>
+        <div class="movie-image">
+          <img src="{{ attr.Poster }}" alt="{{ attr.Title }}" />{{ attr.Image }}
+        </div>
+      </div>
+    </div>
+    <button
+      class="loadmore-button"
+      *ngIf="loadingPage < movies.length"
+      (click)="loadmore()"
+    >
+      LoadMore
+    </button>
+  </ng-container>
+  <ng-template #error
+    ><div class="error-message">Search not found sorry!</div></ng-template
+  >
+</div>

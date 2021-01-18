@@ -1,0 +1,16 @@
+<div class="container m-auto" id="container">
+  <div class="form-container sign-in-container">
+    <form action="#">
+      <h1>Api Key</h1>
+      <input
+        type="text"
+        [(ngModel)]="key"
+        placeholder="ApiKey"
+        name="key"
+        required
+      />
+      <a href="#">{{ "apiloginwarning" | translate }}</a>
+      <button (click)="this.apiTest()">Validate</button>
+    </form>
+  </div>
+</div>
