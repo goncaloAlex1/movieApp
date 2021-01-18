@@ -30,14 +30,15 @@ export class MovieDetailsComponent implements OnInit {
           this.toastr.error('Movie not Found', 'Error', {
             positionClass: 'toast-bottom-right',
           });
+          this.movie = false;
         } else {
           try {
             this.getMovieInfo(data.Search, params.name);
           } catch (error) {}
         }
       });
-       this.loader.hide();
-        this.loaded = true;
+      this.loader.hide();
+      this.loaded = true;
     });
   }
 
