@@ -1,10 +1,11 @@
-<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+<nav class="navbar navbar-expand-lg">
   <a class="navbar-brand" href="#">Search app</a>
 
   <div class="ml-auto d-flex">
-    <div class="collapse navbar-collapse" id="navbarColor01">
+    <div id="navbarColor01">
       <ul class="navbar-nav">
         <li (click)="status = !status" class="nav-item dropdown show">
+          <i class="fa fa-globe"></i>
           <a
             class="nav-link dropdown-toggle"
             data-toggle="dropdown"
@@ -16,15 +17,14 @@
 
           <div
             [ngClass]="status ? 'show' : ''"
-            class="dropdown-menu"
-            style="left: -47px"
+            class="dropdown-menu dropdown-lang"
           >
             <a
               *ngFor="let lang of translate.getLangs()"
               (click)="translate.use(lang)"
               [ngStyle]="
                 lang == translate.currentLang
-                  ? { 'background-color': 'lightblue' }
+                  ? { 'background-color': '#CEE8FF' }
                   : { 'background-color': '' }
               "
               class="dropdown-item"
@@ -36,7 +36,7 @@
       </ul>
     </div>
     <div *ngIf="api.api" (click)="logout()">
-      <a class="nav-link ml-auto" href="#" style="color: white">Logout</a>
+      <a class="nav-link ml-auto" href="#">Logout</a>
     </div>
   </div>
 </nav>

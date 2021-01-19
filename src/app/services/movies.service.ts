@@ -26,6 +26,15 @@ export class MoviesService {
         type
     );
   }
+  public getMovieDetails(movie: string): Observable<any> {
+    return this.http.get<any>(
+      'http://www.omdbapi.com/?apikey=' +
+        this.api +
+        '&t=' +
+        movie +
+        '&plot=full'
+    );
+  }
 
   public apiTest(key: string): Observable<any> {
     return this.http.get<any>(

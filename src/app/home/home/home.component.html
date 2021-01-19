@@ -51,13 +51,15 @@
         </div>
       </div>
     </div>
-    <button
-      class="loadmore-button"
-      *ngIf="loadingPage < movies.length"
-      (click)="loadmore()"
-    >
-      LoadMore
-    </button>
+    <div class="text-center">
+      <button
+        class="loadmore-button"
+        *ngIf="loadingPage < movies.length"
+        (click)="loadmore()"
+      >
+        LoadMore
+      </button>
+    </div>
   </ng-container>
   <ng-template #error
     ><div class="error-message">Search not found sorry!</div></ng-template

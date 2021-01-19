@@ -14,7 +14,7 @@ export class HomeComponent implements OnInit {
   public loadingPage = 6;
   public cdr: ChangeDetectorRef;
   public movieUrl: string = 'batman';
-  public searchBy = { movie: 'movie', series: 'series', episode: 'episode' };
+  public searchBy = { movie: 'Movies', series: 'Series', episode: 'Episodes' };
   public type: string;
   constructor(
     public movieService: MoviesService,

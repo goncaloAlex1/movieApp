@@ -25,7 +25,7 @@ export class MovieDetailsComponent implements OnInit {
     this.route.params.subscribe((params) => {
       this.loader.show();
 
-      this.movieService.getMovie(params.name).subscribe((data) => {
+      this.movieService.getMovieDetails(params.name).subscribe((data) => {
         if (data.Error) {
           this.toastr.error('Movie not Found', 'Error', {
             positionClass: 'toast-bottom-right',
@@ -33,28 +33,27 @@ export class MovieDetailsComponent implements OnInit {
           this.movie = false;
         } else {
           try {
-            this.getMovieInfo(data.Search, params.name);
+            this.getMovieInfo(data, params.name);
           } catch (error) {}
         }
       });
-      this.loader.hide();
-      this.loaded = true;
+      setTimeout(() => {
+        this.loader.hide();
+      }, 1000);
     });
   }
 
   public getMovieInfo(data: any, title: string) {
     try {
-      var info = data.find(
-        (x) => x.Title.toLowerCase() === title.toLowerCase()
-      );
-      this.movie = info;
-      this.movieUrl = info.Title;
+      this.movie = data;
+      this.movieUrl = data.Title;
     } catch {
       this.toastr.error('Movie name needs to be specific', 'Error', {
         positionClass: 'toast-bottom-right',
       });
       this.movie = false;
     }
+    this.loaded = true;
   }
   public changeMovie(title: string) {
     this.router.navigate(['/details/' + title]);
