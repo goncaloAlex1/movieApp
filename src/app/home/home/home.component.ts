@@ -11,13 +11,15 @@ export class HomeComponent implements OnInit {
   public movies = [];
   public loadingPage = 6;
   public cdr: ChangeDetectorRef;
-  public movieUrl: string = 'batman';
+  public movieUrl;
   public searchBy = { movie: 'Movies', series: 'Series', episode: 'Episodes' };
   public type: string;
   constructor(
     public movieService: MoviesService,
     private loader: NgxSpinnerService
-  ) {}
+  ) {
+    this.movieUrl = this.movieService.selected;
+  }
 
   ngOnInit(): void {
     this.loader.show();
@@ -39,12 +41,14 @@ export class HomeComponent implements OnInit {
           this.movies = data.Search;
           this.loadingPage = 6;
           this.loader.hide();
+          this.movieService.selected = this.movieUrl;
         });
     } else {
       this.movieService.getMovie(this.movieUrl).subscribe((data) => {
         this.movies = data.Search;
         this.loadingPage = 6;
         this.loader.hide();
+        this.movieService.selected = this.movieUrl;
       });
     }
   }

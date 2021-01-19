@@ -8,6 +8,7 @@ import { catchError, map } from 'rxjs/operators';
 })
 export class MoviesService {
   public apiKey: string;
+  public selected = 'batman';
   public api = localStorage.getItem('apiKey');
   constructor(private http: HttpClient, private toastr: ToastrService) {}
 

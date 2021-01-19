@@ -32,7 +32,7 @@ export class MovieDetailsComponent implements OnInit {
           this.movie = false;
         } else {
           try {
-            this.getMovieInfo(data, params.name);
+            this.getMovieInfo(data);
           } catch (error) {}
         }
       });
@@ -42,16 +42,9 @@ export class MovieDetailsComponent implements OnInit {
     });
   }
 
-  public getMovieInfo(data: any, title: string) {
-    try {
-      this.movie = data;
-      this.movieUrl = data.Title;
-    } catch {
-      this.toastr.error('Movie name needs to be specific', 'Error', {
-        positionClass: 'toast-bottom-right',
-      });
-      this.movie = false;
-    }
+  public getMovieInfo(data: any) {
+    this.movie = data;
+    this.movieUrl = data.Title;
     this.loaded = true;
   }
   public changeMovie(title: string) {
