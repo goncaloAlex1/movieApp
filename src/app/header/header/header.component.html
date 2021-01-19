@@ -4,7 +4,7 @@
   <div class="ml-auto d-flex">
     <div id="navbarColor01">
       <ul class="navbar-nav">
-        <li (click)="status = !status" class="nav-item dropdown show">
+        <li (click)="show = !show" class="nav-item dropdown show">
           <i class="fa fa-globe"></i>
           <a
             class="nav-link dropdown-toggle"
@@ -16,7 +16,7 @@
           >
 
           <div
-            [ngClass]="status ? 'show' : ''"
+            [ngClass]="show ? 'show' : ''"
             class="dropdown-menu dropdown-lang"
           >
             <a

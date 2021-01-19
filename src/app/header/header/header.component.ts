@@ -8,7 +8,7 @@ import { MoviesService } from 'src/app/services/movies.service';
   styleUrls: ['./header.component.scss'],
 })
 export class HeaderComponent implements OnInit {
-  public status: boolean = false;
+  public show: boolean = false;
   constructor(public translate: TranslateService, public api: MoviesService) {}
 
   ngOnInit(): void {}
