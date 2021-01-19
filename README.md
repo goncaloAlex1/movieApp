@@ -1,14 +1,17 @@
 ## Start project
 run the following commands by the same order in the terminal:
-->npm i
+
+-> npm i
+
 -> npm run build
+
 -> npm run start
 
 
-Navigate to `http://localhost:4200/` after those commands too se the app.
-This app is a search frontend app that uses `http://www.omdbapi.com/` as the api.
+Navigate to `http://localhost:4200/` after those commands too see the app.
 
-# DiamondApp
+
+# Search app
 
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 10.2.0.
 
