@@ -47,7 +47,18 @@
       >
         <div class="movie-title">{{ attr.Title }}</div>
         <div class="movie-image">
-          <img src="{{ attr.Poster }}" alt="{{ attr.Title }}" />{{ attr.Image }}
+          <img
+            *ngIf="attr.Poster !== 'N/A'; else defaultImage"
+            src="{{ attr.Poster }}"
+            alt="{{ attr.Title }}"
+          />{{ attr.Image }}
+
+          <ng-template #defaultImage>
+            <img
+              src="../../../assets/movies-default.PNG"
+              alt="{{ attr.Title }}"
+            />{{ attr.Image }}
+          </ng-template>
         </div>
       </div>
     </div>

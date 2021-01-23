@@ -38,7 +38,9 @@ export class HomeComponent implements OnInit {
       this.movieService
         .getMovieWithType(this.movieUrl, this.type, this.page)
         .subscribe((data) => {
-          this.movies.push(data.Search);
+          for (var i = 0; i < data.Search.length; i++) {
+            this.movies.push(data.Search[i]);
+          }
           this.loader.hide();
           this.movieService.selected = this.movieUrl;
         });
@@ -54,6 +56,7 @@ export class HomeComponent implements OnInit {
     }
   }
   public addInput() {
+    this.page = 1;
     this.loader.show();
     if (this.type) {
       this.movieService
