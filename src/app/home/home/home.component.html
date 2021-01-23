@@ -43,7 +43,7 @@
       <div
         *ngFor="let attr of movies | slice: 0:loadingPage"
         class="movie-container"
-        routerLink="/details/{{ attr.Title }}"
+        routerLink="/details/{{ attr.imdbID }}"
       >
         <div class="movie-title">{{ attr.Title }}</div>
         <div class="movie-image">

@@ -48,7 +48,18 @@ export class MovieDetailsComponent implements OnInit {
     this.loaded = true;
   }
   public changeMovie(title: string) {
-    this.router.navigate(['/details/' + title]);
+    this.movieService.getMovieDetailsbyName(title).subscribe((data) => {
+      if (data.Error) {
+        this.toastr.error('Movie not Found', 'Error', {
+          positionClass: 'toast-bottom-right',
+        });
+        this.movie = false;
+      } else {
+        try {
+          this.getMovieInfo(data);
+        } catch (error) {}
+      }
+    });
   }
   public goBack() {
     this.router.navigate(['/']);

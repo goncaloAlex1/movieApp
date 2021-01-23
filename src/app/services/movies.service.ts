@@ -44,6 +44,15 @@ export class MoviesService {
     return this.http.get<any>(
       'http://www.omdbapi.com/?apikey=' +
         localStorage.getItem('apiKey') +
+        '&i=' +
+        movie +
+        '&plot=full'
+    );
+  }
+  public getMovieDetailsbyName(movie: string): Observable<any> {
+    return this.http.get<any>(
+      'http://www.omdbapi.com/?apikey=' +
+        localStorage.getItem('apiKey') +
         '&t=' +
         movie +
         '&plot=full'
