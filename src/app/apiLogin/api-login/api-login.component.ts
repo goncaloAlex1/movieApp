@@ -36,11 +36,8 @@ export class ApiLoginComponent implements OnInit {
   }
 
   public sucess() {
-    localStorage.setItem('apiKey', this.key);
-    this.router.navigate(['/']);
     this.toastr.success('Api key generated', 'Sucess', {
       positionClass: 'toast-bottom-right,',
     });
-    window.location.reload();
   }
 }

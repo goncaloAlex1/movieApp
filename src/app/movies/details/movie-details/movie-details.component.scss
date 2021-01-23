@@ -1,3 +1,5 @@
+@import "../../../../variables/variables";
+
 .details-container {
   .logo {
     max-width: 150px;
@@ -15,13 +17,13 @@
     color: #444;
     margin-top: 5%;
     grid-template-columns: 84% 16%;
-    @media screen and (max-width: 769px) {
+    @media screen and (max-width: $md) {
       grid-template-columns: 100%;
     }
     .btn-search {
       margin-left: 10px;
-      background: linear-gradient(45deg, #ac79ad, #2a86e8);
-      @media screen and (max-width: 769px) {
+      background: $search_button_color;
+      @media screen and (max-width: $md) {
         margin-left: 0;
         width: 200px;
         margin: auto;
@@ -57,14 +59,26 @@
     margin-top: 16%;
     box-shadow: 4px 0px 12px 2px;
     background: linear-gradient(45deg, #267cad, transparent);
+
+    @media screen and (max-width: $sm) {
+      width: 70%;
+      margin-right: auto;
+      margin-left: auto;
+    }
   }
   .wrapper-movies {
     display: grid;
-    grid-template-columns: 60.9% 36.1%;
+    grid-template-columns: 72.9% 27.1%;
 
     color: #444;
     background-color: #aecee1;
     margin-bottom: 30px;
+    @media screen and (max-width: $md) {
+      grid-template-columns: 50% 50%;
+    }
+    @media screen and (max-width: $md) {
+      grid-template-columns: 100%;
+    }
   }
   input {
     left: 16px;
@@ -73,33 +87,40 @@
   }
   .wrapper-movies-text {
     display: grid;
-
     background-color: white;
-    grid-gap: 3%;
     color: #444;
   }
   .wrapper-movies-image {
     display: grid;
-
     grid-gap: 3%;
     background-color: #fff;
     color: #444;
 
     img {
-      width: 100%;
-      height: 436px;
+      max-width: 100%;
+      transform: translateY(-50%);
+      position: relative;
+      top: 50%;
+      margin-left: auto;
+      min-height: 430px;
+      @media screen and (max-width: $md) {
+        min-height: 0;
+        transform: translateX(-50%);
+        left: 50%;
+        top: 0;
+        margin-left: 0;
+      }
     }
   }
   .movie-title {
     font-weight: 100;
     border-bottom: 1px solid #6aaed4;
-    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen,
-      Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif;
     font-size: 60px;
+    @media screen and (max-width: $md) {
+      font-size: 35px;
+    }
   }
   .movie-text {
-    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen,
-      Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif;
     font-size: 25px;
   }
   .bk-btn {
@@ -135,4 +156,7 @@
   position: relative;
   bottom: 100px;
   margin-top: 21%;
+  @media screen and (max-width: $md) {
+    margin-top: 136px;
+  }
 }

@@ -15,5 +15,6 @@ export class HeaderComponent implements OnInit {
 
   public logout() {
     localStorage.removeItem('apiKey');
+    this.api.logout();
   }
 }

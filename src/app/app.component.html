@@ -1,5 +1,5 @@
 <app-header></app-header>
-<ng-container *ngIf="api.api; else Loggin">
+<ng-container *ngIf="api.currApiKey$ | async; else Loggin">
   <div class="container">
     <router-outlet></router-outlet>
   </div>

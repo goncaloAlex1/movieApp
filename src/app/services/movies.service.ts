@@ -7,30 +7,43 @@ import { catchError, map } from 'rxjs/operators';
   providedIn: 'root',
 })
 export class MoviesService {
-  public apiKey: string;
   public selected = 'batman';
+  public currentKey = new ReplaySubject(1);
+  public currApiKey$ = this.currentKey.asObservable();
   public api = localStorage.getItem('apiKey');
   constructor(private http: HttpClient, private toastr: ToastrService) {}
 
-  public getMovie(movie: string): Observable<any> {
-    return this.http.get<any>(
-      'http://www.omdbapi.com/?apikey=' + this.api + '&s=' + movie
-    );
-  }
-  public getMovieWithType(movie: string, type: string): Observable<any> {
+  public getMovie(movie: string, page: number): Observable<any> {
+    console.log(this.currApiKey$);
     return this.http.get<any>(
       'http://www.omdbapi.com/?apikey=' +
-        this.api +
+        localStorage.getItem('apiKey') +
+        '&s=' +
+        movie +
+        '&page=' +
+        page
+    );
+  }
+  public getMovieWithType(
+    movie: string,
+    type: string,
+    page: number
+  ): Observable<any> {
+    return this.http.get<any>(
+      'http://www.omdbapi.com/?apikey=' +
+        localStorage.getItem('apiKey') +
         '&s=' +
         movie +
         '&type=' +
-        type
+        type +
+        '&page=' +
+        page
     );
   }
   public getMovieDetails(movie: string): Observable<any> {
     return this.http.get<any>(
       'http://www.omdbapi.com/?apikey=' +
-        this.api +
+        localStorage.getItem('apiKey') +
         '&t=' +
         movie +
         '&plot=full'
@@ -38,8 +51,19 @@ export class MoviesService {
   }
 
   public apiTest(key: string): Observable<any> {
-    return this.http.get<any>(
-      'http://www.omdbapi.com/?apikey=' + key + '&s=batman'
-    );
+    return this.http
+      .get<any>('http://www.omdbapi.com/?apikey=' + key + '&s=batman')
+      .pipe(
+        map((response) => {
+          const result = response;
+          if (result) {
+            localStorage.setItem('apiKey', key);
+            this.currentKey.next(key);
+          }
+        })
+      );
+  }
+  public logout() {
+    this.currentKey.next(null);
   }
 }
