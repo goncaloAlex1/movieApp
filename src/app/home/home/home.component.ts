@@ -1,5 +1,6 @@
 import { ChangeDetectorRef, Component, OnInit } from '@angular/core';
 import { NgxSpinnerService } from 'ngx-spinner';
+import { Subscription } from 'rxjs';
 import { MoviesService } from 'src/app/services/movies.service';
 
 @Component({
@@ -9,7 +10,7 @@ import { MoviesService } from 'src/app/services/movies.service';
 })
 export class HomeComponent implements OnInit {
   public movies = [];
-  public loadingPage = 9;
+  public loadingPage = 12;
   public cdr: ChangeDetectorRef;
   public movieUrl;
   public searchBy = { movie: 'Movies', series: 'Series', episode: 'Episodes' };
@@ -22,30 +23,59 @@ export class HomeComponent implements OnInit {
     this.movieUrl = this.movieService.selected;
   }
 
-  ngOnInit(): void {
+  async ngOnInit() {
     this.loader.show();
-    this.movieService.getMovie(this.movieUrl, this.page).subscribe((data) => {
-      this.movies = data.Search;
-    });
+    await this.initPage();
+    console.log(this.movies);
     this.loader.hide();
   }
-
+  public async initPage() {
+    await this.movieService
+      .getMovie(this.movieUrl, this.page)
+      .toPromise()
+      .then((data) => {
+        for (var i = 0; i < data.Search.length; i++) {
+          this.movies.push(data.Search[i]);
+        }
+      });
+    this.page++;
+    this.movieService
+      .getMovie(this.movieUrl, this.page)
+      .toPromise()
+      .then((data) => {
+        for (var i = 0; i < data.Search.length; i++) {
+          this.movies.push(data.Search[i]);
+        }
+      });
+  }
   public loadmore() {
     console.log(this.movies);
-    this.loadingPage += 9;
+    this.loadingPage += 12;
     this.page++;
     if (this.type) {
-      this.movieService
-        .getMovieWithType(this.movieUrl, this.type, this.page)
-        .subscribe((data) => {
-          for (var i = 0; i < data.Search.length; i++) {
-            this.movies.push(data.Search[i]);
-          }
-          this.loader.hide();
-          this.movieService.selected = this.movieUrl;
-        });
+      this.loadMoreRequestType();
     } else {
-      this.movieService.getMovie(this.movieUrl, this.page).subscribe((data) => {
+      this.loadmoreRequest();
+    }
+    this.page++;
+  }
+
+  public async loadmoreRequest() {
+    await this.movieService
+      .getMovie(this.movieUrl, this.page)
+      .toPromise()
+      .then((data) => {
+        this.loader.hide();
+        for (var i = 0; i < data.Search.length; i++) {
+          this.movies.push(data.Search[i]);
+        }
+        this.movieService.selected = this.movieUrl;
+        this.page++;
+      });
+    this.movieService
+      .getMovie(this.movieUrl, this.page)
+      .toPromise()
+      .then((data) => {
         console.log(this.movies);
         this.loader.hide();
         for (var i = 0; i < data.Search.length; i++) {
@@ -53,27 +83,41 @@ export class HomeComponent implements OnInit {
         }
         this.movieService.selected = this.movieUrl;
       });
-    }
   }
-  public addInput() {
-    this.page = 1;
-    this.loader.show();
-    if (this.type) {
-      this.movieService
-        .getMovieWithType(this.movieUrl, this.type, this.page)
-        .subscribe((data) => {
-          this.movies = data.Search;
-          this.loadingPage = 9;
-          this.loader.hide();
-          this.movieService.selected = this.movieUrl;
-        });
-    } else {
-      this.movieService.getMovie(this.movieUrl, this.page).subscribe((data) => {
-        this.movies = data.Search;
-        this.loadingPage = 9;
+
+  public async loadMoreRequestType() {
+    await this.movieService
+      .getMovieWithType(this.movieUrl, this.type, this.page)
+      .toPromise()
+      .then((data) => {
+        for (var i = 0; i < data.Search.length; i++) {
+          this.movies.push(data.Search[i]);
+        }
+        this.loader.hide();
+        this.movieService.selected = this.movieUrl;
+        this.page++;
+      });
+    this.movieService
+      .getMovieWithType(this.movieUrl, this.type, this.page)
+      .toPromise()
+      .then((data) => {
+        for (var i = 0; i < data.Search.length; i++) {
+          this.movies.push(data.Search[i]);
+        }
         this.loader.hide();
         this.movieService.selected = this.movieUrl;
       });
+  }
+  public addInput() {
+    this.page = 1;
+    this.movies = [];
+    this.loader.show();
+    if (this.type) {
+      this.loadMoreRequestType();
+      this.loadingPage = 12;
+    } else {
+      this.loadmoreRequest();
+      this.loadingPage = 12;
     }
   }
 }

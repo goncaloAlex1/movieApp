@@ -18,7 +18,7 @@ import { TranslateLoader, TranslateModule } from '@ngx-translate/core';
 import { TranslateHttpLoader } from '@ngx-translate/http-loader';
 import { NgSelectModule } from '@ng-select/ng-select';
 import { HeaderComponent } from './header/header/header.component';
-
+import { TabsModule } from 'ngx-tabset';
 export function HttpLoaderFactory(http: HttpClient) {
   return new TranslateHttpLoader(http);
 }
@@ -35,6 +35,7 @@ export function HttpLoaderFactory(http: HttpClient) {
     ParticlesModule,
     BrowserModule,
     NgSelectModule,
+    TabsModule.forRoot(),
     BrowserAnimationsModule,
     ToastrModule.forRoot(),
     AppRoutingModule,

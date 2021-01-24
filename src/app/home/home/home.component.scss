@@ -80,6 +80,9 @@
     position: relative;
     bottom: 45px;
 
+    @media screen and (min-width: $lg) {
+      grid-template-columns: 14.7% 14.7% 14.7% 14.7% 14.7% 14.7%;
+    }
     @media screen and (max-width: $md) {
       grid-template-columns: 48.5% 48.5%;
     }
@@ -93,7 +96,7 @@
   }
 
   .loadmore-button {
-    width: 200px;
+    width: 150px;
     background: linear-gradient(45deg, #60dbf5, #74337bc9);
     height: 44px;
     font-size: 25px;
@@ -119,6 +122,10 @@
     @media screen and (max-width: $md) {
       height: 330px;
     }
+    @media screen and (min-width: $lg) {
+      height: 273px;
+    }
+
     &:hover {
       transition: all 0.2s ease-in-out;
       transform: scale(1.1);
@@ -126,6 +133,9 @@
     .movie-image {
       cursor: pointer;
       height: 94%;
+      @media screen and (min-width: $lg) {
+        height: 91%;
+      }
 
       img {
         width: 100%;
@@ -134,6 +144,9 @@
         position: relative;
         transform: translateY(-50%);
         top: 50%;
+        @media screen and (min-width: $lg) {
+          height: 100%;
+        }
       }
     }
     .movie-title {
