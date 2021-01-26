@@ -1,4 +1,4 @@
-@import url("https://fonts.googleapis.com/css?family=Montserrat:400,800");
+@import "../../../variables/variables";
 
 * {
   box-sizing: border-box;
@@ -45,8 +45,8 @@ a {
 
 button {
   border-radius: 20px;
-  border: 1px solid #ff4b2b;
-  background-color: #ff4b2b;
+  border: 1px solid #007bff;
+  background: #007bff;
   color: #ffffff;
   font-size: 12px;
   font-weight: bold;

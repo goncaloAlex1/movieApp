@@ -89,6 +89,10 @@
     display: grid;
     background-color: white;
     color: #444;
+    padding: 15px 0 15px 15px;
+    @media screen and (max-width: $md) {
+      padding: 15px;
+    }
   }
   .wrapper-movies-image {
     display: grid;
@@ -113,15 +117,18 @@
     }
   }
   .movie-title {
-    font-weight: 100;
+    font-weight: 700;
     border-bottom: 1px solid #6aaed4;
-    font-size: 60px;
-    @media screen and (max-width: $md) {
-      font-size: 35px;
+    font-size: 30px;
+    @media screen and (max-width: $sm) {
+      font-size: 21px;
     }
   }
   .movie-text {
-    font-size: 25px;
+    font-size: 21px;
+    @media screen and (max-width: $sm) {
+      font-size: 15px;
+    }
   }
   .bk-btn {
     height: 34px;

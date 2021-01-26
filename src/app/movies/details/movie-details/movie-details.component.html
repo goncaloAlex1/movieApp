@@ -37,9 +37,10 @@
         <div class="wrapper-movies">
           <div class="wrapper-movies-text">
             <span class="movie-title">{{ movie.Title }}</span>
-            <span class="movie-text"
-              >Metascore:
+            <span class="movie-text">
+              <span class="font-weight-bold">Metascore</span>:
               <span
+                class="font-weight-light"
                 [ngStyle]="
                   (movie.Metascore < '50' && { color: 'red' }) ||
                   (movie.Metascore > '70' && { color: 'green' }) ||
@@ -48,9 +49,16 @@
                 >{{ movie.Metascore }}</span
               >
             </span>
-            <span class="movie-text">Genre: {{ movie.Genre }} </span>
-            <span class="movie-text">Year: {{ movie.Year }}</span>
-            <span class="movie-text"> Type: {{ movie.Type }}</span>
+            <span class="movie-text font-weight-light">
+              <span class="font-weight-bold">Genre</span>: {{ movie.Genre }}
+            </span>
+            <span class="movie-text font-weight-light">
+              <span class="font-weight-bold">Year</span>: {{ movie.Year }}</span
+            >
+            <span class="movie-text font-weight-light">
+              <span class="font-weight-bold">Type</span> :
+              {{ movie.Type }}</span
+            >
           </div>
 
           <div class="wrapper-movies-image">
