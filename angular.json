@@ -53,12 +53,12 @@
                 {
                   "type": "initial",
                   "maximumWarning": "2mb",
-                  "maximumError": "5mb"
+                  "maximumError": "15mb"
                 },
                 {
                   "type": "anyComponentStyle",
                   "maximumWarning": "6kb",
-                  "maximumError": "10kb"
+                  "maximumError": "25kb"
                 }
               ]
             }
@@ -118,6 +118,10 @@
               "devServerTarget": "diamond-app:serve:production"
             }
           }
+        },
+        "deploy": {
+          "builder": "angular-cli-ghpages:deploy",
+          "options": {}
         }
       }
     }
