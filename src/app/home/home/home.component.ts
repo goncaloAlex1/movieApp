@@ -16,18 +16,13 @@ export class HomeComponent implements OnInit {
   public searchBy = { movie: 'Movies', series: 'Series', episode: 'Episodes' };
   public type: string;
   public page: number = 1;
-  constructor(
-    public movieService: MoviesService,
-    private loader: NgxSpinnerService
-  ) {
+  constructor(public movieService: MoviesService) {
     this.movieUrl = this.movieService.selected;
   }
 
   async ngOnInit() {
-    this.loader.show();
     await this.initPage();
     console.log(this.movies);
-    this.loader.hide();
   }
   public async initPage() {
     await this.movieService
@@ -65,7 +60,6 @@ export class HomeComponent implements OnInit {
       .getMovie(this.movieUrl, this.page)
       .toPromise()
       .then((data) => {
-        this.loader.hide();
         for (var i = 0; i < data.Search.length; i++) {
           this.movies.push(data.Search[i]);
         }
@@ -77,7 +71,6 @@ export class HomeComponent implements OnInit {
       .toPromise()
       .then((data) => {
         console.log(this.movies);
-        this.loader.hide();
         for (var i = 0; i < data.Search.length; i++) {
           this.movies.push(data.Search[i]);
         }
@@ -93,7 +86,6 @@ export class HomeComponent implements OnInit {
         for (var i = 0; i < data.Search.length; i++) {
           this.movies.push(data.Search[i]);
         }
-        this.loader.hide();
         this.movieService.selected = this.movieUrl;
         this.page++;
       });
@@ -104,14 +96,13 @@ export class HomeComponent implements OnInit {
         for (var i = 0; i < data.Search.length; i++) {
           this.movies.push(data.Search[i]);
         }
-        this.loader.hide();
+
         this.movieService.selected = this.movieUrl;
       });
   }
   public addInput() {
     this.page = 1;
     this.movies = [];
-    this.loader.show();
     if (this.type) {
       this.loadMoreRequestType();
       this.loadingPage = 12;

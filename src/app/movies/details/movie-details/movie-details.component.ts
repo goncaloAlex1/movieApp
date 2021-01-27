@@ -17,12 +17,11 @@ export class MovieDetailsComponent implements OnInit {
     private router: Router,
     private movieService: MoviesService,
     private toastr: ToastrService,
-    private loader: NgxSpinnerService
   ) {}
 
   ngOnInit() {
     this.route.params.subscribe((params) => {
-      this.loader.show();
+
 
       this.movieService.getMovieDetails(params.name).subscribe((data) => {
         if (data.Error) {
@@ -36,9 +35,7 @@ export class MovieDetailsComponent implements OnInit {
           } catch (error) {}
         }
       });
-      setTimeout(() => {
-        this.loader.hide();
-      }, 1000);
+
     });
   }
 

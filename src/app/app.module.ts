@@ -6,7 +6,11 @@ import { AppComponent } from './app.component';
 import { HomeComponent } from './home/home/home.component';
 import { MovieDetailsComponent } from './movies/details/movie-details/movie-details.component';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
-import { HttpClient, HttpClientModule } from '@angular/common/http';
+import {
+  HttpClient,
+  HttpClientModule,
+  HTTP_INTERCEPTORS,
+} from '@angular/common/http';
 import { FormsModule } from '@angular/forms';
 import { ParticlesModule } from 'angular-particle';
 import { ToastrModule } from 'ngx-toastr';
@@ -18,6 +22,7 @@ import { TranslateLoader, TranslateModule } from '@ngx-translate/core';
 import { TranslateHttpLoader } from '@ngx-translate/http-loader';
 import { NgSelectModule } from '@ng-select/ng-select';
 import { HeaderComponent } from './header/header/header.component';
+import { LoadingInterceptor } from './interceptor/loading.interceptor';
 export function HttpLoaderFactory(http: HttpClient) {
   return new TranslateHttpLoader(http);
 }
@@ -48,8 +53,11 @@ export function HttpLoaderFactory(http: HttpClient) {
       },
     }),
     NgbModule,
+    NgxSpinnerModule,
   ],
-  providers: [],
+  providers: [
+    { provide: HTTP_INTERCEPTORS, useClass: LoadingInterceptor, multi: true },
+  ],
   bootstrap: [AppComponent],
 })
 export class AppModule {}
