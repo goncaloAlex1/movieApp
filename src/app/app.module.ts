@@ -23,7 +23,6 @@ import { TranslateHttpLoader } from '@ngx-translate/http-loader';
 import { NgSelectModule } from '@ng-select/ng-select';
 import { HeaderComponent } from './header/header/header.component';
 import { LoadingInterceptor } from './interceptor/loading.interceptor';
-import { ModalModule } from 'ngx-bootstrap/modal';
 export function HttpLoaderFactory(http: HttpClient) {
   return new TranslateHttpLoader(http);
 }
@@ -40,7 +39,6 @@ export function HttpLoaderFactory(http: HttpClient) {
     ParticlesModule,
     BrowserModule,
     NgSelectModule,
-    ModalModule.forRoot(),
     BrowserAnimationsModule,
     ToastrModule.forRoot(),
     AppRoutingModule,
