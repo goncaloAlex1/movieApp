@@ -61,7 +61,7 @@ export class MoviesService {
 
   public apiTest(key: string): Observable<any> {
     return this.http
-      .get<any>('http://www.omdbapi.com/?apikey=' + key + '&s=batman')
+      .get<any>('https://www.omdbapi.com/?apikey=' + key + '&s=batman')
       .pipe(
         map((response) => {
           const result = response;
