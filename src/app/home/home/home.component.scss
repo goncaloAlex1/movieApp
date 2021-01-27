@@ -87,11 +87,10 @@
       grid-template-columns: 48.5% 48.5%;
     }
     @media screen and (max-width: $sm) {
-      grid-template-columns: 60%;
-      margin-left: 20%;
+      grid-template-columns: 100%;
       grid-row-gap: 52px;
-      margin-right: 20%;
-      width: 100%;
+      margin: auto;
+      width: 226px;
     }
   }
 

@@ -23,8 +23,9 @@ import { TranslateHttpLoader } from '@ngx-translate/http-loader';
 import { NgSelectModule } from '@ng-select/ng-select';
 import { HeaderComponent } from './header/header/header.component';
 import { LoadingInterceptor } from './interceptor/loading.interceptor';
+import { ModalModule } from 'ngx-bootstrap/modal';
 export function HttpLoaderFactory(http: HttpClient) {
-  return new TranslateHttpLoader(http);
+  return new TranslateHttpLoader(http, './assets/i18n/', '.json');
 }
 @NgModule({
   declarations: [
@@ -42,6 +43,7 @@ export function HttpLoaderFactory(http: HttpClient) {
     BrowserAnimationsModule,
     ToastrModule.forRoot(),
     AppRoutingModule,
+    ModalModule.forRoot(),
     FormsModule,
     NgxSpinnerModule,
     TranslateModule.forRoot({
