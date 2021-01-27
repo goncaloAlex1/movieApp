@@ -16,7 +16,7 @@ export class MoviesService {
   public getMovie(movie: string, page: number): Observable<any> {
     console.log(this.currApiKey$);
     return this.http.get<any>(
-      'http://www.omdbapi.com/?apikey=' +
+      'https://www.omdbapi.com/?apikey=' +
         localStorage.getItem('apiKey') +
         '&s=' +
         movie +
@@ -30,7 +30,7 @@ export class MoviesService {
     page: number
   ): Observable<any> {
     return this.http.get<any>(
-      'http://www.omdbapi.com/?apikey=' +
+      'https://www.omdbapi.com/?apikey=' +
         localStorage.getItem('apiKey') +
         '&s=' +
         movie +
@@ -42,7 +42,7 @@ export class MoviesService {
   }
   public getMovieDetails(movie: string): Observable<any> {
     return this.http.get<any>(
-      'http://www.omdbapi.com/?apikey=' +
+      'https://www.omdbapi.com/?apikey=' +
         localStorage.getItem('apiKey') +
         '&i=' +
         movie +
@@ -51,7 +51,7 @@ export class MoviesService {
   }
   public getMovieDetailsbyName(movie: string): Observable<any> {
     return this.http.get<any>(
-      'http://www.omdbapi.com/?apikey=' +
+      'https://www.omdbapi.com/?apikey=' +
         localStorage.getItem('apiKey') +
         '&t=' +
         movie +
