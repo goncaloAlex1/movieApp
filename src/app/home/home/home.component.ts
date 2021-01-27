@@ -1,4 +1,12 @@
-import { ChangeDetectorRef, Component, OnInit } from '@angular/core';
+import {
+  AfterViewInit,
+  ChangeDetectorRef,
+  Component,
+  OnInit,
+  TemplateRef,
+  ViewChild,
+} from '@angular/core';
+import { BsModalRef, BsModalService } from 'ngx-bootstrap/modal';
 import { NgxSpinnerService } from 'ngx-spinner';
 import { Subscription } from 'rxjs';
 import { MoviesService } from 'src/app/services/movies.service';
@@ -8,21 +16,34 @@ import { MoviesService } from 'src/app/services/movies.service';
   templateUrl: './home.component.html',
   styleUrls: ['./home.component.scss'],
 })
-export class HomeComponent implements OnInit {
+export class HomeComponent implements OnInit, AfterViewInit {
   public movies = [];
   public loadingPage = 12;
   public cdr: ChangeDetectorRef;
+  modalRef: BsModalRef;
+  @ViewChild('template') template;
   public movieUrl;
   public searchBy = { movie: 'Movies', series: 'Series', episode: 'Episodes' };
   public type: string;
   public page: number = 1;
-  constructor(public movieService: MoviesService) {
+  constructor(
+    public movieService: MoviesService,
+    private modalService: BsModalService
+  ) {
     this.movieUrl = this.movieService.selected;
   }
-
+  openModal(template: TemplateRef<any>) {
+    this.modalRef = this.modalService.show(template);
+  }
   async ngOnInit() {
     await this.initPage();
     console.log(this.movies);
+  }
+  ngAfterViewInit() {
+    if (!localStorage.getItem('modalAccepted')) {
+      this.modalRef = this.modalService.show(this.template);
+      localStorage.setItem('modalAccepted', 'true');
+    }
   }
   public async initPage() {
     await this.movieService
