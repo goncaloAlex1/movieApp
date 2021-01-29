@@ -11,10 +11,13 @@ export class HeaderComponent implements OnInit {
   public show: boolean = false;
   constructor(public translate: TranslateService, public api: MoviesService) {}
 
-  ngOnInit(): void {}
+  ngOnInit(): void {
+    this.api.currentUser.subscribe((e) => {
+      console.log(e);
+    });
+  }
 
   public logout() {
-    localStorage.removeItem('apiKey');
     this.api.logout();
   }
 }

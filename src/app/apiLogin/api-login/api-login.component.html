@@ -1,16 +1,52 @@
 <div class="container m-auto" id="container">
   <div class="form-container sign-in-container">
-    <form action="#">
-      <h1>Api Key</h1>
+    <form #apiForm="ngForm">
+      <h1>Movie Api Login</h1>
+
+      <input
+        type="text"
+        [(ngModel)]="username"
+        placeholder="User Name"
+        name="username"
+        id="username"
+        required
+        maxlength="18"
+        minlength="5"
+        #user="ngModel"
+      />
+      <div
+        style="color: #029414"
+        *ngIf="user.valid && (user.dirty || user.touched)"
+      >
+        Valid
+      </div>
+      <div
+        style="color: crimson"
+        *ngIf="user.invalid && (user.dirty || user.touched)"
+      >
+        Usernames should be between 5 to 18 letters
+      </div>
       <input
         type="text"
         [(ngModel)]="key"
+        [ngStyle]="
+          !apiKeyError
+            ? { 'margin-bottom': '33px' }
+            : { 'margin-bottom': '9px' }
+        "
         placeholder="ApiKey"
         name="key"
         required
       />
+      <div style="color: crimson" *ngIf="apiKeyError">
+        Your api key is incorrect
+      </div>
       <a href="#">{{ "apiloginwarning" | translate }}</a>
-      <button (click)="this.apiTest()">
+      <button
+        [class.disabled]="!apiForm.valid"
+        [disabled]="!apiForm.valid"
+        (click)="this.apiTest()"
+      >
         {{ "validate_button" | translate }}
       </button>
     </form>

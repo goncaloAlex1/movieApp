@@ -35,7 +35,10 @@
         </li>
       </ul>
     </div>
-    <div *ngIf="api.api" (click)="logout()">
+    <div *ngIf="api.currApiUser$ | async as user">
+      <a class="nav-link ml-auto" href="#">{{ user }}</a>
+    </div>
+    <div *ngIf="api.currApiKey$ | async" (click)="logout()">
       <a class="nav-link ml-auto" href="#">Logout</a>
     </div>
   </div>

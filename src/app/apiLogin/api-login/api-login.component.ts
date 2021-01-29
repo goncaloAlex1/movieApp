@@ -10,6 +10,8 @@ import config from '../../../assets/configs/background.json';
 })
 export class ApiLoginComponent implements OnInit {
   public key: string;
+  public username: string;
+  public apiKeyError: boolean;
   public configs = { myparams: null, myStyle: null, width: null, height: null };
   constructor(
     public movieService: MoviesService,
@@ -25,16 +27,18 @@ export class ApiLoginComponent implements OnInit {
   ngOnInit(): void {}
 
   public apiTest() {
-    this.movieService.apiTest(this.key).subscribe(
+    this.movieService.apiTest(this.key, this.username).subscribe(
       (data) => this.sucess(),
 
-      (err) =>
-        this.toastr.error('Invalid Api key', 'Error', {
-          positionClass: 'toast-bottom-right',
-        })
+      (err) => this.apiCallFail()
     );
   }
-
+  public apiCallFail() {
+    this.apiKeyError = true;
+    this.toastr.error('Invalid Api key', 'Error', {
+      positionClass: 'toast-bottom-right',
+    });
+  }
   public sucess() {
     this.toastr.success('Api key generated', 'Sucess', {
       positionClass: 'toast-bottom-right,',

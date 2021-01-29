@@ -9,7 +9,9 @@ import { catchError, map } from 'rxjs/operators';
 export class MoviesService {
   public selected = 'batman';
   public currentKey = new ReplaySubject(1);
+  public currentUser = new ReplaySubject(1);
   public currApiKey$ = this.currentKey.asObservable();
+  public currApiUser$ = this.currentUser.asObservable();
   public api = localStorage.getItem('apiKey');
   constructor(private http: HttpClient, private toastr: ToastrService) {}
 
@@ -59,7 +61,7 @@ export class MoviesService {
     );
   }
 
-  public apiTest(key: string): Observable<any> {
+  public apiTest(key: string, userName: string): Observable<any> {
     return this.http
       .get<any>('https://www.omdbapi.com/?apikey=' + key + '&s=batman')
       .pipe(
@@ -67,6 +69,8 @@ export class MoviesService {
           const result = response;
           if (result) {
             localStorage.setItem('apiKey', key);
+            localStorage.setItem('username', userName);
+            this.currentUser.next(userName);
             this.currentKey.next(key);
           }
         })
@@ -74,5 +78,8 @@ export class MoviesService {
   }
   public logout() {
     this.currentKey.next(null);
+    this.currentUser.next(null);
+    localStorage.removeItem('apiKey');
+    localStorage.removeItem('username');
   }
 }
