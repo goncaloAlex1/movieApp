@@ -24,7 +24,7 @@ export class LoadingInterceptor implements HttpInterceptor {
       color: '#588fbb',
     });
     return next.handle(request).pipe(
-      delay(500),
+      delay(200),
       finalize(() => {
         this.loader.hide();
       })

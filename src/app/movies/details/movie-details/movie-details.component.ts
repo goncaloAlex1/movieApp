@@ -16,13 +16,11 @@ export class MovieDetailsComponent implements OnInit {
     private route: ActivatedRoute,
     private router: Router,
     private movieService: MoviesService,
-    private toastr: ToastrService,
+    private toastr: ToastrService
   ) {}
 
   ngOnInit() {
     this.route.params.subscribe((params) => {
-
-
       this.movieService.getMovieDetails(params.name).subscribe((data) => {
         if (data.Error) {
           this.toastr.error('Movie not Found', 'Error', {
@@ -35,7 +33,6 @@ export class MovieDetailsComponent implements OnInit {
           } catch (error) {}
         }
       });
-
     });
   }
 

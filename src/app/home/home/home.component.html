@@ -11,12 +11,11 @@
     </button>
   </div>
   <div class="modal-body">
-    This website is a movie search api.
+    Hello {{ movieService.currApiUser$ }}This website is a movie search api.
     <br />All the information about the movies is provided by
     <span style="color: blue">omdbapi</span><br />This website is made by
     goncaloAlex1 at Github.<br />
     This website os copywrited.<br />
-    Click × to close this information.
   </div>
 </ng-template>
 
@@ -60,7 +59,7 @@
       {{ "search_button_text" | translate }}
     </button>
   </div>
-  <ng-container *ngIf="movies; else error">
+  <ng-container *ngIf="movies.length > 0; else error">
     <div class="wrapper-3cols">
       <div
         *ngFor="let attr of movies | slice: 0:loadingPage"

@@ -78,21 +78,24 @@ export class HomeComponent implements OnInit, AfterViewInit {
       .getMovie(this.movieUrl, this.page)
       .toPromise()
       .then((data) => {
-        for (var i = 0; i < data.Search.length; i++) {
-          this.movies.push(data.Search[i]);
+        if (!data.Error) {
+          for (var i = 0; i < data.Search.length; i++) {
+            this.movies.push(data.Search[i]);
+          }
+          this.movieService.selected = this.movieUrl;
+          this.page++;
         }
-        this.movieService.selected = this.movieUrl;
-        this.page++;
       });
     this.movieService
       .getMovie(this.movieUrl, this.page)
       .toPromise()
       .then((data) => {
-        console.log(this.movies);
-        for (var i = 0; i < data.Search.length; i++) {
-          this.movies.push(data.Search[i]);
+        if (!data.Error) {
+          for (var i = 0; i < data.Search.length; i++) {
+            this.movies.push(data.Search[i]);
+          }
+          this.movieService.selected = this.movieUrl;
         }
-        this.movieService.selected = this.movieUrl;
       });
   }
 
